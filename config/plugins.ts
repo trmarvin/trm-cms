@@ -1,13 +1,11 @@
 // config/plugins.ts
 export default ({ env }) => ({
-  // JWT for users-permissions
   'users-permissions': {
     config: {
       jwtSecret: env('JWT_SECRET', env('USERS_PERMISSIONS_JWT_SECRET')),
     },
   },
 
-  // GraphQL
   graphql: {
     enabled: true,
     config: {
@@ -17,11 +15,9 @@ export default ({ env }) => ({
         introspection: env('NODE_ENV') !== 'production',
         playground: env('NODE_ENV') !== 'production',
       },
-      // shadowCRUD: true, // optional
     },
   },
 
-  // Uploads (Cloudinary)
   upload: {
     config: {
       provider: 'cloudinary',
@@ -29,10 +25,21 @@ export default ({ env }) => ({
         cloud_name: env('CLOUDINARY_NAME'),
         api_key: env('CLOUDINARY_KEY'),
         api_secret: env('CLOUDINARY_SECRET'),
+        // 👇 Some provider builds read default params from here:
+        params: {
+          folder: 'trm-cms/uploads',
+          use_filename: true,
+          unique_filename: true,
+          overwrite: false,
+        },
       },
       actionOptions: {
+        // 👇 Others read them from the actionOptions call:
         upload: {
           folder: 'trm-cms/uploads',
+          use_filename: true,
+          unique_filename: true,
+          overwrite: false,
         },
         delete: {},
       },
