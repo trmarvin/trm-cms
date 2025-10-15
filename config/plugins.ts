@@ -25,22 +25,10 @@ export default ({ env }) => ({
         cloud_name: env('CLOUDINARY_NAME'),
         api_key: env('CLOUDINARY_KEY'),
         api_secret: env('CLOUDINARY_SECRET'),
-        // 👇 Some provider builds read default params from here:
-        params: {
-          folder: 'trm-cms/uploads',
-          use_filename: true,
-          unique_filename: true,
-          overwrite: false,
-        },
       },
       actionOptions: {
-        // 👇 Others read them from the actionOptions call:
-        upload: {
-          folder: 'trm-cms/uploads',
-          use_filename: true,
-          unique_filename: true,
-          overwrite: false,
-        },
+        upload: { folder: 'trm-cms/uploads' },
+        uploadStream: { folder: 'trm-cms/uploads' }, // 👈 add this
         delete: {},
       },
     },
