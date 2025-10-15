@@ -12,13 +12,14 @@ export default ({ env }) => {
         }
       : undefined;
 
+  const computedUrl = https ? 'https://localhost:1337' : 'http://localhost:1337';
+
   return {
     host: env('HOST', '0.0.0.0'),
     port: env.int('PORT', 1337),
-    url: env('PUBLIC_URL', env.bool('SSL_KEY_PATH', false) ? 'https://localhost:1337' : 'http://localhost:1337'),
+    url: env('PUBLIC_URL', computedUrl),
     app: { keys: env.array('APP_KEYS') },
     ...(https ? { https } : {}),
-    // If you ever see proxy/secure cookies issues behind Render/Cloudflare, try enabling:
-    // proxy: true,
+    // proxy: true, // enable if you see secure-cookie issues behind Render/Cloudflare
   };
 };
