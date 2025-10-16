@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocks_paragraphs",
+  "info": {
+    "displayName": "Paragraph",
+    "icon": "write"
+  },
+  "options": {},
+  "attributes": {
+    "text_md": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

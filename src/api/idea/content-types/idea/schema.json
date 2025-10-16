@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ideas",
+  "info": {
+    "singularName": "idea",
+    "pluralName": "ideas",
+    "displayName": "📝 Idea"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "excerpt": {
+      "type": "blocks"
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "ideas"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "ideas"
+    },
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "ideas"
+    },
+    "notes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::note.note",
+      "inversedBy": "ideas"
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo-meta"
+      ]
+    },
+    "essays": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::essay.essay",
+      "mappedBy": "ideas"
+    }
+  }
+}

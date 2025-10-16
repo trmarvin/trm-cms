@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_blocks_image_with_captions",
+  "info": {
+    "displayName": "Image with caption",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt": {
+      "type": "string",
+      "required": true
+    },
+    "caption": {
+      "type": "richtext"
+    },
+    "credit": {
+      "type": "richtext"
+    },
+    "display": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "full",
+        "wide",
+        "float-left",
+        "float-right"
+      ]
+    }
+  },
+  "config": {}
+}

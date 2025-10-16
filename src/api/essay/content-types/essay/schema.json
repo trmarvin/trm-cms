@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "essays",
+  "info": {
+    "singularName": "essay",
+    "pluralName": "essays",
+    "displayName": "📝 Essay"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "essays"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "essays"
+    },
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "essays"
+    },
+    "notes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::note.note",
+      "inversedBy": "essays"
+    },
+    "thinkers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::thinker.thinker",
+      "inversedBy": "essays"
+    },
+    "ideas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::idea.idea",
+      "inversedBy": "essays"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resources",
+  "info": {
+    "singularName": "resource",
+    "pluralName": "resources",
+    "displayName": "☂️ Resource"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "resource_type": {
+      "type": "enumeration",
+      "enum": [
+        "book_list",
+        "source_sheet",
+        "syllabus",
+        "review",
+        "how_to"
+      ]
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo-meta",
+      "repeatable": true
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "resources"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "resources"
+    },
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "resources"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "mappedBy": "resources"
+    },
+    "hubs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hub.hub",
+      "mappedBy": "resources"
+    }
+  }
+}

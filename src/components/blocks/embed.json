@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_embeds",
+  "info": {
+    "displayName": "Embed",
+    "icon": "landscape"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "enumeration",
+      "enum": [
+        "YouTube",
+        "Vimeo",
+        "Soundcloud",
+        "Map",
+        "Custom"
+      ]
+    }
+  },
+  "config": {}
+}

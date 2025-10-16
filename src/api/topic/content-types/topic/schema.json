@@ -1,0 +1,103 @@
+{
+  "kind": "collectionType",
+  "collectionName": "topics",
+  "info": {
+    "singularName": "topic",
+    "pluralName": "topics",
+    "displayName": "🏷️ Topic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "he_name": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "string"
+    },
+    "group": {
+      "type": "enumeration",
+      "enum": [
+        "period",
+        "region",
+        "movement",
+        "concept",
+        "corpus",
+        "division",
+        "book_or_tractate",
+        "unit_type",
+        "unit_name",
+        "language",
+        "holiday"
+      ]
+    },
+    "subtopics": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::topic.topic",
+      "mappedBy": "parent"
+    },
+    "parent": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::topic.topic",
+      "inversedBy": "subtopics"
+    },
+    "thinkers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::thinker.thinker",
+      "mappedBy": "topics"
+    },
+    "ideas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::idea.idea",
+      "mappedBy": "topics"
+    },
+    "notes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::note.note",
+      "mappedBy": "topics"
+    },
+    "essays": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::essay.essay",
+      "mappedBy": "topics"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "mappedBy": "topics"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "mappedBy": "topics"
+    },
+    "hubs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hub.hub",
+      "mappedBy": "topics"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notes",
+  "info": {
+    "singularName": "note",
+    "pluralName": "notes",
+    "displayName": "📝 Note"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "note_type": {
+      "type": "enumeration",
+      "enum": [
+        "general",
+        "books",
+        "torah"
+      ]
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "excerpt": {
+      "type": "blocks"
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "notes"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "notes"
+    },
+    "ideas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::idea.idea",
+      "mappedBy": "notes"
+    },
+    "thinkers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::thinker.thinker",
+      "inversedBy": "notes"
+    },
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "notes"
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo-meta",
+      "repeatable": false
+    },
+    "essays": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::essay.essay",
+      "mappedBy": "notes"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "collectionName": "components_text_text_locators",
+  "info": {
+    "displayName": "Text Locator",
+    "icon": "folder"
+  },
+  "options": {},
+  "attributes": {
+    "corpus": {
+      "type": "enumeration",
+      "enum": [
+        "tanakh",
+        "talmud"
+      ]
+    },
+    "division": {
+      "type": "enumeration",
+      "enum": [
+        "torah",
+        "neviim",
+        "ketuvim",
+        "zeraim",
+        "moed",
+        "nashim",
+        "nezikin",
+        "kodashim",
+        "toharot"
+      ]
+    },
+    "book_or_tractate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::topic.topic"
+    },
+    "unit_type": {
+      "type": "enumeration",
+      "enum": [
+        "parsha",
+        "mishnah",
+        "perek",
+        "daf"
+      ]
+    },
+    "unit_name": {
+      "type": "string"
+    },
+    "title_english": {
+      "type": "string"
+    },
+    "title_he": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

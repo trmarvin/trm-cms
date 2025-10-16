@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_blocks_book_list_items",
+  "info": {
+    "displayName": "Book List Item",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "biblio": {
+      "type": "richtext",
+      "required": true
+    },
+    "book_cover_img": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "annotation": {
+      "type": "richtext"
+    }
+  },
+  "config": {}
+}

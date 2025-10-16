@@ -430,6 +430,543 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBookBook extends Struct.CollectionTypeSchema {
+  collectionName: 'books';
+  info: {
+    displayName: '\uD83D\uDCDA Books';
+    pluralName: 'books';
+    singularName: 'book';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    ideas: Schema.Attribute.Relation<'manyToMany', 'api::idea.idea'>;
+    is_pinned: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::book.book'> &
+      Schema.Attribute.Private;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    thinker: Schema.Attribute.Relation<'manyToOne', 'api::thinker.thinker'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDomainDomain extends Struct.CollectionTypeSchema {
+  collectionName: 'domains';
+  info: {
+    displayName: '\uD83C\uDFF7\uFE0F Domain';
+    pluralName: 'domains';
+    singularName: 'domain';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    hubs: Schema.Attribute.Relation<'manyToMany', 'api::hub.hub'>;
+    ideas: Schema.Attribute.Relation<'manyToMany', 'api::idea.idea'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::domain.domain'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEssayEssay extends Struct.CollectionTypeSchema {
+  collectionName: 'essays';
+  info: {
+    displayName: '\uD83D\uDCDD Essay';
+    pluralName: 'essays';
+    singularName: 'essay';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'manyToMany', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    excerpt: Schema.Attribute.Text;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    ideas: Schema.Attribute.Relation<'manyToMany', 'api::idea.idea'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::essay.essay'> &
+      Schema.Attribute.Private;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
+  collectionName: 'global_settings';
+  info: {
+    displayName: 'Global Settings';
+    pluralName: 'global-settings';
+    singularName: 'global-setting';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    default_image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::global-setting.global-setting'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    site_description: Schema.Attribute.String;
+    site_title: Schema.Attribute.String;
+    social_links: Schema.Attribute.Component<'shared.social-link', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
+  collectionName: 'guides';
+  info: {
+    displayName: '\u2602\uFE0F Guide';
+    pluralName: 'guides';
+    singularName: 'guide';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'manyToMany', 'api::book.book'>;
+    breadcrumbs: Schema.Attribute.Component<'text.text-locator', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    excerpt: Schema.Attribute.Text;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    guide_type: Schema.Attribute.Enumeration<
+      [
+        'domain_guide',
+        'text_guide',
+        'halakhic_guide',
+        'historical_site_guide',
+        'resource_guide',
+        'meta_guide',
+      ]
+    >;
+    hubs: Schema.Attribute.Relation<'manyToMany', 'api::hub.hub'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    seo: Schema.Attribute.Component<'shared.seo-meta', true>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHubHub extends Struct.CollectionTypeSchema {
+  collectionName: 'hubs';
+  info: {
+    displayName: '\uD83C\uDFDB\uFE0F Hub';
+    pluralName: 'hubs';
+    singularName: 'hub';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    curated_section: Schema.Attribute.Component<'shared.curated-section', true>;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    introduction: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::hub.hub'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    seo: Schema.Attribute.Component<'shared.seo-meta', true>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiIdeaIdea extends Struct.CollectionTypeSchema {
+  collectionName: 'ideas';
+  info: {
+    displayName: '\uD83D\uDCDD Idea';
+    pluralName: 'ideas';
+    singularName: 'idea';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'manyToMany', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    excerpt: Schema.Attribute.Blocks;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::idea.idea'> &
+      Schema.Attribute.Private;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo-meta']>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNoteNote extends Struct.CollectionTypeSchema {
+  collectionName: 'notes';
+  info: {
+    displayName: '\uD83D\uDCDD Note';
+    pluralName: 'notes';
+    singularName: 'note';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'manyToMany', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    excerpt: Schema.Attribute.Blocks;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    ideas: Schema.Attribute.Relation<'manyToMany', 'api::idea.idea'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::note.note'> &
+      Schema.Attribute.Private;
+    note_type: Schema.Attribute.Enumeration<['general', 'books', 'torah']>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo-meta', false>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPagePage extends Struct.CollectionTypeSchema {
+  collectionName: 'pages';
+  info: {
+    displayName: '\uD83D\uDCC4 Page';
+    pluralName: 'pages';
+    singularName: 'page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo-meta', true>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiResourceResource extends Struct.CollectionTypeSchema {
+  collectionName: 'resources';
+  info: {
+    displayName: '\u2602\uFE0F Resource';
+    pluralName: 'resources';
+    singularName: 'resource';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'manyToMany', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    excerpt: Schema.Attribute.Text;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    hubs: Schema.Attribute.Relation<'manyToMany', 'api::hub.hub'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::resource.resource'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    resource_type: Schema.Attribute.Enumeration<
+      ['book_list', 'source_sheet', 'syllabus', 'review', 'how_to']
+    >;
+    seo: Schema.Attribute.Component<'shared.seo-meta', true>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiThinkerThinker extends Struct.CollectionTypeSchema {
+  collectionName: 'thinkers';
+  info: {
+    displayName: '\uD83D\uDCDD Thinker';
+    pluralName: 'thinkers';
+    singularName: 'thinker';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.DynamicZone<
+      [
+        'blocks.quote',
+        'blocks.paragraph',
+        'blocks.image-with-caption',
+        'blocks.embed',
+        'blocks.book-list-item',
+      ]
+    >;
+    books: Schema.Attribute.Relation<'oneToMany', 'api::book.book'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dates: Schema.Attribute.String;
+    domains: Schema.Attribute.Relation<'manyToMany', 'api::domain.domain'>;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    featured_image: Schema.Attribute.Component<'shared.featured-image', false>;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    hubs: Schema.Attribute.Relation<'manyToMany', 'api::hub.hub'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::thinker.thinker'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.DynamicZone<['shared.seo-meta']>;
+    short_bio: Schema.Attribute.Blocks;
+    slug: Schema.Attribute.UID<'name'>;
+    topics: Schema.Attribute.Relation<'manyToMany', 'api::topic.topic'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTopicTopic extends Struct.CollectionTypeSchema {
+  collectionName: 'topics';
+  info: {
+    displayName: '\uD83C\uDFF7\uFE0F Topic';
+    pluralName: 'topics';
+    singularName: 'topic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aliases: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    essays: Schema.Attribute.Relation<'manyToMany', 'api::essay.essay'>;
+    group: Schema.Attribute.Enumeration<
+      [
+        'period',
+        'region',
+        'movement',
+        'concept',
+        'corpus',
+        'division',
+        'book_or_tractate',
+        'unit_type',
+        'unit_name',
+        'language',
+        'holiday',
+      ]
+    >;
+    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    he_name: Schema.Attribute.String;
+    hubs: Schema.Attribute.Relation<'manyToMany', 'api::hub.hub'>;
+    ideas: Schema.Attribute.Relation<'manyToMany', 'api::idea.idea'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    notes: Schema.Attribute.Relation<'manyToMany', 'api::note.note'>;
+    parent: Schema.Attribute.Relation<'manyToOne', 'api::topic.topic'>;
+    publishedAt: Schema.Attribute.DateTime;
+    resources: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::resource.resource'
+    >;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    subtopics: Schema.Attribute.Relation<'oneToMany', 'api::topic.topic'>;
+    thinkers: Schema.Attribute.Relation<'manyToMany', 'api::thinker.thinker'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -940,6 +1477,18 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::book.book': ApiBookBook;
+      'api::domain.domain': ApiDomainDomain;
+      'api::essay.essay': ApiEssayEssay;
+      'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
+      'api::guide.guide': ApiGuideGuide;
+      'api::hub.hub': ApiHubHub;
+      'api::idea.idea': ApiIdeaIdea;
+      'api::note.note': ApiNoteNote;
+      'api::page.page': ApiPagePage;
+      'api::resource.resource': ApiResourceResource;
+      'api::thinker.thinker': ApiThinkerThinker;
+      'api::topic.topic': ApiTopicTopic;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

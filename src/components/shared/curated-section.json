@@ -1,0 +1,70 @@
+{
+  "collectionName": "components_shared_curated_sections",
+  "info": {
+    "displayName": "curated_section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "section_type": {
+      "type": "enumeration",
+      "enum": [
+        "guides",
+        "essays",
+        "notes",
+        "ideas",
+        "thinkers",
+        "books",
+        "resources",
+        "mixed"
+      ]
+    },
+    "display": {
+      "type": "enumeration",
+      "enum": [
+        "cards",
+        "list",
+        "grid",
+        "timeline",
+        "carousel"
+      ]
+    },
+    "manual_guides": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guide.guide"
+    },
+    "manual_essays": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::essay.essay"
+    },
+    "manual_notes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::note.note"
+    },
+    "manual_ideas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::idea.idea"
+    },
+    "manual_thinkers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::thinker.thinker"
+    },
+    "manual_resources": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::resource.resource"
+    }
+  },
+  "config": {}
+}

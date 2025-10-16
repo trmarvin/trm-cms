@@ -1,0 +1,91 @@
+{
+  "kind": "collectionType",
+  "collectionName": "thinkers",
+  "info": {
+    "singularName": "thinker",
+    "pluralName": "thinkers",
+    "displayName": "📝 Thinker"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "dates": {
+      "type": "string"
+    },
+    "short_bio": {
+      "type": "blocks"
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "thinkers"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "thinkers"
+    },
+    "notes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::note.note",
+      "mappedBy": "thinkers"
+    },
+    "seo": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.seo-meta"
+      ]
+    },
+    "books": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::book.book",
+      "mappedBy": "thinker"
+    },
+    "essays": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::essay.essay",
+      "mappedBy": "thinkers"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "mappedBy": "thinkers"
+    },
+    "hubs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hub.hub",
+      "mappedBy": "thinkers"
+    }
+  }
+}

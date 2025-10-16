@@ -1,0 +1,67 @@
+{
+  "collectionName": "components_shared_featured_images",
+  "info": {
+    "displayName": "Featured Image",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "featured_image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt": {
+      "type": "string",
+      "required": true
+    },
+    "caption": {
+      "type": "blocks"
+    },
+    "credit": {
+      "type": "blocks"
+    },
+    "layout": {
+      "type": "enumeration",
+      "required": true,
+      "default": "none",
+      "enum": [
+        "banner",
+        "full-bleed",
+        "inset",
+        "none"
+      ]
+    },
+    "aspect": {
+      "type": "enumeration",
+      "enum": [
+        "ration 16:9",
+        "ratio 3:2",
+        "ratio 1:1",
+        "ratio 4:5"
+      ]
+    },
+    "focal_x": {
+      "type": "decimal",
+      "default": 0,
+      "max": 1
+    },
+    "focal_y": {
+      "type": "decimal",
+      "default": 0,
+      "max": 1
+    },
+    "hide_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "use_as_og": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "config": {}
+}

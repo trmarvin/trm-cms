@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guides",
+  "info": {
+    "singularName": "guide",
+    "pluralName": "guides",
+    "displayName": "☂️ Guide"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "guide_type": {
+      "type": "enumeration",
+      "enum": [
+        "domain_guide",
+        "text_guide",
+        "halakhic_guide",
+        "historical_site_guide",
+        "resource_guide",
+        "meta_guide"
+      ]
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "body": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.quote",
+        "blocks.paragraph",
+        "blocks.image-with-caption",
+        "blocks.embed",
+        "blocks.book-list-item"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "component": "shared.seo-meta",
+      "repeatable": true
+    },
+    "domains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::domain.domain",
+      "mappedBy": "guides"
+    },
+    "topics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::topic.topic",
+      "inversedBy": "guides"
+    },
+    "thinkers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::thinker.thinker",
+      "inversedBy": "guides"
+    },
+    "books": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::book.book",
+      "mappedBy": "guides"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "inversedBy": "guides"
+    },
+    "hubs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::hub.hub",
+      "inversedBy": "guides"
+    },
+    "breadcrumbs": {
+      "type": "component",
+      "component": "text.text-locator",
+      "repeatable": false
+    }
+  }
+}

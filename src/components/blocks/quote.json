@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_quotes",
+  "info": {
+    "displayName": "Quote",
+    "icon": "quote"
+  },
+  "options": {},
+  "attributes": {
+    "quote_md": {
+      "type": "richtext"
+    },
+    "source": {
+      "type": "richtext"
+    },
+    "thinkers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::thinker.thinker"
+    }
+  },
+  "config": {}
+}

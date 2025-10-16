@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "📚 Books"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "featured_image": {
+      "type": "component",
+      "component": "shared.featured-image",
+      "repeatable": false
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::note.note",
+      "inversedBy": "books"
+    },
+    "ideas": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::idea.idea",
+      "inversedBy": "books"
+    },
+    "thinker": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::thinker.thinker",
+      "inversedBy": "books"
+    },
+    "essays": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::essay.essay",
+      "inversedBy": "books"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "inversedBy": "books"
+    },
+    "resources": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resource.resource",
+      "inversedBy": "books"
+    }
+  }
+}
